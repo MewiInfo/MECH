@@ -114,10 +114,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener locListener = new MyLocationListener();
 
-        // Move map to current location
+        /* Move map to current location
+        Caused Crashes on some devices and emulators, when the current location was not available.
+        Moing Camera to the center of Melaten instead.
+
         Location currentLoc = locManager.getLastKnownLocation(locManager.getBestProvider(new Criteria(),true));
         LatLng location = new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        */
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sites.get(4).getCoordinates()));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
         //Update frequency is set to 3 seconds, minimum distance to 2 meters.
